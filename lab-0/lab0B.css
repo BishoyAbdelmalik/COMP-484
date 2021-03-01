@@ -1,0 +1,59 @@
+* {
+    font-family: sans-serif;
+}
+
+body {
+    background-color: blue;
+}
+
+div {
+    border: solid black 1px;
+    color: white;
+}
+
+.main-box {
+    background-color: white;
+    width: 90%;
+    min-height: 99vh;
+    margin: auto;
+    padding: 15px;
+}
+
+.title-box {
+    background-color: green;
+    padding: 10px 20px;
+    text-align: right;
+}
+
+.title-box h2,
+.title-box h1 {
+    margin: 5px;
+}
+
+.title-box h2 {
+    font-size: 15px;
+}
+
+section {
+    display: flex;
+    margin-top: 10px;
+}
+
+.friends-box {
+    background-color: red;
+    padding: 10px;
+    height: max-content;
+    min-width: 15%;
+    margin: 10px;
+    margin-left: 0;
+}
+
+.blog-posts-box {
+    color: black;
+    margin: 10px;
+    margin-right: 0;
+}
+
+.friends-box h2 {
+    margin: 0;
+}
