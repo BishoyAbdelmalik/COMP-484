@@ -20,14 +20,14 @@ div {
 }
 
 .title-box {
-    background-color: green;
+    background-color: lightgreen;
     padding: 10px 20px;
     text-align: right;
 }
 
 .title-box h2,
 .title-box h1 {
-    margin: 5px;
+    margin: 10px;
 }
 
 .title-box h2 {
@@ -41,6 +41,21 @@ div {
 
 ul {
     padding-left: 15px;
+    margin: 10px 0;
+}
+
+li {
+    margin: 15px 0;
+    width: max-content;
+}
+
+li a {
+    color: white;
+}
+
+li:hover,
+li:hover a {
+    color: red;
 }
 
 .friends-box {
@@ -52,16 +67,60 @@ ul {
     margin-left: 0;
 }
 
-.blog-posts-box {
+.friends-box h1 {
+    font-weight: 400;
+}
+
+.blog-posts-box * {
     color: black;
+}
+
+.blog-posts-box {
     margin: 10px;
     margin-right: 0;
 }
 
-.friends-box h2 {
+.friends-box h1 {
     margin: 0;
 }
 
 .remove-border {
     border: 0;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+.post {
+    background-color: #CCC1DA;
+    padding: 15px 30px;
+}
+
+.post img {
+    width: 30%;
+    margin: 15px;
+    margin-top: 0;
+    margin-right: 0;
+}
+
+.float-clear {
+    clear: both;
+}
+
+.blog-posts-box .post:first-child {
+    margin-top: 0;
+}
+
+.post {
+    margin-top: 20px;
+}
+
+.post div,
+.post div * {
+    text-align: justify;
 }
