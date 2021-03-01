@@ -39,6 +39,10 @@ div {
     margin-top: 10px;
 }
 
+ul {
+    padding-left: 15px;
+}
+
 .friends-box {
     background-color: red;
     padding: 10px;
