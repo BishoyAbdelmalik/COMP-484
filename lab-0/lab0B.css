@@ -34,7 +34,7 @@ div {
     font-size: 15px;
 }
 
-section {
+.main-content {
     display: flex;
     margin-top: 10px;
 }
@@ -56,4 +56,8 @@ section {
 
 .friends-box h2 {
     margin: 0;
+}
+
+.remove-border {
+    border: 0;
 }
