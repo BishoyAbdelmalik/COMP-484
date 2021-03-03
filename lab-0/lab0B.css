@@ -11,6 +11,25 @@ div {
     color: white;
 }
 
+ul {
+    padding-left: 15px;
+    margin: 10px 0;
+}
+
+li {
+    margin: 15px 0;
+    width: max-content;
+}
+
+li a {
+    color: white;
+}
+
+li:hover,
+li:hover a {
+    color: red;
+}
+
 .main-box {
     background-color: white;
     width: 90%;
@@ -37,25 +56,6 @@ div {
 .main-content {
     position: relative;
     margin-top: 10px;
-}
-
-ul {
-    padding-left: 15px;
-    margin: 10px 0;
-}
-
-li {
-    margin: 15px 0;
-    width: max-content;
-}
-
-li a {
-    color: white;
-}
-
-li:hover,
-li:hover a {
-    color: red;
 }
 
 .friends-box {
