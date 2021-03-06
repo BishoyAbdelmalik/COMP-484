@@ -25,8 +25,8 @@ li a {
     color: white;
 }
 
-li:hover,
-li:hover a {
+.friends-box li:hover,
+.friends-box li:hover a {
     color: red;
 }
 
@@ -76,7 +76,7 @@ li:hover a {
     margin: 10px;
     margin-left: 15%;
     margin-right: 0;
-    padding-left: 30px;
+    padding-left: 2em;
 }
 
 .blog-posts-box * {
@@ -105,8 +105,8 @@ li:hover a {
 }
 
 .post img {
-    width: 30%;
-    margin: 15px;
+    width: 20%;
+    margin: 1em;
     margin-top: 0;
     margin-right: 0;
 }
@@ -120,7 +120,7 @@ li:hover a {
 }
 
 .post {
-    margin-top: 20px;
+    margin-top: 1em;
 }
 
 .post div,
