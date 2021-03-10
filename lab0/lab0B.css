@@ -79,6 +79,7 @@ li a {
     padding-left: 2em;
 }
 
+.title-box,
 .blog-posts-box * {
     color: black;
 }
