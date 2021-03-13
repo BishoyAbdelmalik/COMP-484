@@ -4,11 +4,12 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% Using Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{geometry}
-\usepackage{enumitem}
+\usepackage[inline]{enumitem}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Other Settings
+\renewcommand\labelenumii{\alph{enumii}.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Page Setting %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \geometry{letterpaper}
@@ -24,13 +25,24 @@
     \underline{\textbf{Homework 1}}
 \end{center}    
 \begin{enumerate}
-    \item \begin{enumerate}
-        \item[d.] \textbf{What is the first line received from the server? }\newline HTTP/1.0 302 Found
-        \item[e.] \textbf{What is the meaning of the numeric status code you receive in this line (from prior 
+    \item \begin{enumerate} \setcounter{enumii}{3}
+        \item \textbf{What is the first line received from the server? } \newline HTTP/1.0 302 Found
+        \item \textbf{What is the meaning of the numeric status code you receive in this line (from prior 
         question)?} \newline It means it redirected me to another location.
-        \item[f.] \textbf{In general, what does the command “GET /” do? }\newline Send a get request to the path / of the given domain.
-        \item[g.] \textbf{Write the equivalent URL to access this site, as performed in part f…? }\newline
-        
+        \item \textbf{In general, what does the command “GET /” do? } \newline Send a get request to the root of the given domain.
+        \item \textbf{Write the equivalent URL to access this site, as performed in part f…? } \newline http://www.csun.edu/
+        \item \textbf{Now retry with the command “GET /xxyz.html HTTP/1.1” on line 1 (and be sure to 
+        put Host: www.csun.edu on the next line) What do you receive this time?} \newline HTTP/1.1 404 Not Found and an html for the csun 404 page.
+        \item \textbf{What is the meaning of the status code from part h?} \newline Requested file doesn't not found ie doesnt exist.
+        \item \textbf{What web-server type and version is being run at www.csun.edu from the info 
+        returned in part i?} \newline Apache/2.2.3         
     \end{enumerate}
+    \item \begin{enumerate}
+        \item \textbf{What is the complete path of the file djedhi.html on the server?} \newline /var/www/the/last/djedhi.html
+        \item \textbf{What is the domain name of the server?} \newline adamkaplan.org
+        \item \textbf{What is the protocol being used?} \newline HTTPS
+        \item \textbf{What port (on the server) will the web browser try to connect to for this request?} \newline Port 443 since its an HTTPS connection. 
+    \end{enumerate}
+    \item 
 \end{enumerate}
 \end{document}
