@@ -5,25 +5,32 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% Using Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{geometry}
 \usepackage[inline]{enumitem}
+\usepackage{listings}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Other Settings
 \renewcommand\labelenumii{\alph{enumii}.}
-
+\lstset{frame=none,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
 %%%%%%%%%%%%%%%%%%%%%%%%%% Page Setting %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\geometry{letterpaper}
-
+\geometry{letterpaper,left=0.5in,right=0.5in,top=0.5in,bottom=0.5in}
+\linespread{1.15}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Title & Author %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\title{HW1}
+\title{\underline{\textbf{Homework 1}}}
 \author{Bishoy Abdelmalik}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
-\begin{center}
-    \underline{\textbf{Homework 1}}
-\end{center}    
+\maketitle
 \begin{enumerate}
     \item \begin{enumerate} \setcounter{enumii}{3}
         \item \textbf{What is the first line received from the server? } \newline HTTP/1.0 302 Found
@@ -42,6 +49,34 @@
         \item \textbf{What is the domain name of the server?} \newline adamkaplan.org
         \item \textbf{What is the protocol being used?} \newline HTTPS
         \item \textbf{What port (on the server) will the web browser try to connect to for this request?} \newline Port 443 since its an HTTPS connection. 
+    \end{enumerate}
+    \item \begin{enumerate}
+        \item \textbf{What is the Session Transcript for the domain www.cs.ucla.edu?} \newline \begin{lstlisting}
+- - - mx:www.cs.ucla.edu
+
+1 g.edu-servers.net 192.42.93.30 NON-AUTH 34 ms Received 4 Referrals , rcode=NO_ERROR  ucla.edu. 172800 IN NS ns1.dns.ucla.edu,ucla.edu. 172800 IN NS ns2.dns.ucla.edu,ucla.edu. 172800 IN NS ns3.dns.ucla.edu,ucla.edu. 172800 IN NS ns4.dns.ucla.edu,
+2 ns2.dns.ucla.edu 54.201.38.106 AUTH 72 ms Received 1 Referrals , rcode=NO_ERROR  cs.ucla.edu. 14400 IN SOA mname=NS0.CS.UCLA.EDU rname=Postmaster.CS.UCLA.EDU serial=2021030900,
+LookupServer 274ms
+        \end{lstlisting}
+        \item \textbf{What is the Session Transcript for the fictional domain adamkaplan.org?} \newline \begin{lstlisting}
+- - - mx:adamkaplan.org
+
+1 c0.org.afilias-nst.info 199.19.53.1 AUTH 27 ms Received 1 Referrals , rcode=NAME_ERROR  org. 900 IN SOA mname=a0.org.afilias-nst.info rname=noc.afilias-nst.info serial=2014285034,
+LookupServer 55ms 
+       \end{lstlisting}
+       \item \textbf{What is the Session Transcript for the fictional domain flatitude.google.com?} \newline \begin{lstlisting}
+- - - mx:flatitude.google.com
+
+1 f.gtld-servers.net 192.35.51.30 NON-AUTH 35 ms Received 4 Referrals , rcode=NO_ERROR  google.com. 172800 IN NS ns2.google.com,google.com. 172800 IN NS ns1.google.com,google.com. 172800 IN NS ns3.google.com,google.com. 172800 IN NS ns4.google.com,
+2 ns1.google.com 216.239.32.10 AUTH 2 ms Received 1 Referrals , rcode=NAME_ERROR  google.com. 60 IN SOA mname=ns1.google.com rname=dns-admin.google.com serial=362682143,
+LookupServer 104ms
+       \end{lstlisting}
+    \end{enumerate}
+    \item \textbf{URL:} http://akaplan.edu/echo.php?a=b\&q=15\&d=funk\&c=4\&b=2\&e=z
+    \item \begin{enumerate}
+        \item \textbf{csun.edu} 30 hops
+        \item \textbf{youtube.com} 9 hops
+        \item \textbf{www.cs.vu.nl} 27 hops
     \end{enumerate}
     \item 
 \end{enumerate}
