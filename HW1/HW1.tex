@@ -78,9 +78,10 @@ LookupServer 104ms
         \item \textbf{youtube.com} 9 hops
         \item \textbf{www.cs.vu.nl} 27 hops
     \end{enumerate}
-    \item \begin{enumerate}
-        \item[]
-        \item[Packet \#1:] 
+    \item \begin{enumerate}[leftmargin=0.8in]
+        \item[Packet \#1:] Source\underline{ Host A } Dest\underline{ Host B } Seq Num\underline{ 42 } flags:\underline{ SYN }
+        \item[Packet \#2:] Source\underline{ Host B } Dest\underline{ Host A } Seq Num\underline{ 109 } ACK Num\underline{ 43 } flags:\underline{ SYN, ACK } 
+        \item[Packet \#3:] Source\underline{ Host A } Dest\underline{ Host B } Seq Num\underline{ 43 } ACK Num\underline{ 110 } flags:\underline{ ACK } 
     \end{enumerate}
 \end{enumerate}
 \end{document}
