@@ -37,6 +37,10 @@
                 background: red;
             }
             
+            .error {
+                background: #ffafaf;
+            }
+            
             input,
             textarea {
                 margin-top: 5px;
@@ -50,10 +54,29 @@
                 margin: 0;
                 width: 100%;
             }
+            
+            .invalid-input {
+                color: red;
+                margin: 0;
+            }
+            
+            .hidden {
+                display: none;
+            }
         </style>
         <script>
-            function submit(event) {
-                event.preventDefault();
+            function submit() {
+                let result = document.getElementById("result");
+                checkUsername(username);
+                checkPassword(password);
+                checkID(id);
+                let checks = document.getElementsByClassName("hidden").length;
+                if (checks == 3) {
+                    result.innerHTML = "SUCCESS!";
+                } else {
+                    result.innerHTML = "Please fix invalid input and try again";
+
+                }
             }
 
             function isAlphabet(char) {
@@ -97,18 +120,24 @@
             }
 
             function checkUsername(username) {
+                let error = document.getElementById("username-error");
                 if (validUsername(username.value)) {
                     username.classList.remove("invalid");
+                    error.classList.add("hidden");
                 } else {
                     username.classList.add("invalid");
+                    error.classList.remove("hidden");
                 }
             }
 
             function checkPassword(password) {
+                let error = document.getElementById("password-error");
                 if (validPassword(password.value)) {
                     password.classList.remove("invalid");
+                    error.classList.add("hidden");
                 } else {
                     password.classList.add("invalid");
+                    error.classList.remove("hidden");
                 }
             }
 
@@ -126,10 +155,16 @@
             }
 
             function checkID(id) {
+                let error = document.getElementById("id-error");
+
                 if (validID(id.value)) {
                     id.classList.remove("invalid");
+                    error.classList.add("hidden");
+
                 } else {
                     id.classList.add("invalid");
+                    error.classList.remove("hidden");
+
                 }
             }
 
@@ -147,18 +182,24 @@
                     }
                 }
             }
+            let form;
+            let username;
+            let password;
+            let id;
+            let msg;
             window.addEventListener("load", () => {
-                let form = document.getElementById("form");
-                let username = document.getElementById("username");
-                let password = document.getElementById("password");
-                let id = document.getElementById("id");
-                let msg = document.getElementById("msg");
+                form = document.getElementById("form");
+                username = document.getElementById("username");
+                password = document.getElementById("password");
+                id = document.getElementById("id");
+                msg = document.getElementById("msg");
                 username.addEventListener("change", () => checkUsername(username));
                 password.addEventListener("change", () => checkPassword(password));
                 id.addEventListener("change", () => checkID(id));
                 msg.addEventListener("keyup", (e) => checkmsg(msg));
-                form.addEventListener("submit", submit);
-
+                form.addEventListener("submit", (event) => event.preventDefault());
+                let submitbtn = document.getElementById("submit");
+                submitbtn.addEventListener("click", submit);
             });
         </script>
     </head>
@@ -168,14 +209,17 @@
             <div>
                 <label for="username">Username:</label><br/>
                 <input type="text" name="username" id="username">
+                <p id="username-error" class="invalid-input hidden">only letters are allowed</p>
             </div>
             <div>
                 <label for="password">Password:</label><br/>
                 <input type="password" name="password" id="password">
+                <p id="password-error" class="invalid-input hidden">Password must include 1 uppercase and 1 lowercase letters</p>
             </div>
             <div>
                 <label for="id">Student ID:</label><br/>
                 <input type="text" name="id" id="id">
+                <p id="id-error" class="invalid-input hidden">Student ID must be 9 digits</p>
             </div>
             <div>
                 <label for="msg">Message:</label><br/>
@@ -183,7 +227,10 @@
                 <p><span id="words">25</span> words left</p>
             </div>
             <div>
-                <input type="submit" value="Submit">
+                <input id="submit" type="button" value="Submit">
+            </div>
+            <div>
+                <h4 id="result"></h4>
             </div>
         </form>
 
