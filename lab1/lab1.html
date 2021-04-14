@@ -70,11 +70,15 @@
                 checkUsername(username);
                 checkPassword(password);
                 checkID(id);
-                let checks = document.getElementsByClassName("hidden").length;
-                if (checks == 3) {
+                //TODO add check to which one has error
+                let checks = document.getElementsByClassName("hidden");
+                let body = document.getElementsByTagName("body")[0];
+                if (checks.length == 3) {
                     result.innerHTML = "SUCCESS!";
+                    body.classList.remove("error");
                 } else {
                     result.innerHTML = "Please fix invalid input and try again";
+                    body.classList.add("error");
 
                 }
             }
