@@ -1,41 +1,192 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>form</title>
-    <script>
-        window.addEventListener("load", () => {
-            console.log("loaded");
-        });
-    </script>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>form</title>
+        <style>
+            form {
+                margin: auto;
+                width: 40%;
+            }
+            
+            form div,
+            input,
+            textarea {
+                width: 100%;
+                box-sizing: border-box;
+            }
+            
+            textarea {
+                min-height: 60px;
+            }
+            
+            form p {
+                padding: 0;
+                margin: 0 0 10px;
+            }
+            
+            form div {
+                padding: 10px;
+            }
+            
+            .invalid {
+                border-color: red;
+                background: red;
+            }
+            
+            input,
+            textarea {
+                margin-top: 5px;
+            }
+            
+            form div:last-child {
+                padding-top: 0;
+            }
+            
+            input[type="submit"] {
+                margin: 0;
+                width: 100%;
+            }
+        </style>
+        <script>
+            function submit(event) {
+                event.preventDefault();
+            }
 
-<body>
-    <form>
-        <div>
-            <label for="username">Username:</label><br/>
-            <input type="text" name="username" id="username">
-        </div>
-        <div>
-            <label for="password">Password:</label><br/>
-            <input type="password" name="password" id="password">
-        </div>
-        <div>
-            <label for="id">Student ID:</label><br/>
-            <input type="text" name="id" id="id">
-        </div>
-        <div>
-            <label for="msg">Message:</label><br/>
-            <textarea name="msg" id="msg" cols="20" rows="5"></textarea>
-            <p><span id="words">25</span> words left</p>
-        </div>
-        <button id="submit">Submit</button>
-    </form>
+            function isAlphabet(char) {
+                char = char.charCodeAt(0)
+                return (char >= 65 && char < 91) || (char >= 97 && char < 123)
+            }
 
-</body>
+            function validUsername(username) {
+                let valid = true
+                for (let i = 0; i < username.length; i++) {
+                    if (!isAlphabet(username.charAt(i))) {
+                        return false
+                    }
+                }
+                return true
+            }
+
+            function isUpperCase(char) {
+                char = char.charCodeAt(0)
+                return (char >= 65 && char < 91)
+            }
+
+            function isLowerCase(char) {
+                char = char.charCodeAt(0)
+                return (char >= 97 && char < 123)
+            }
+
+            function validPassword(password) {
+                let uppercase = 0;
+                let lowercase = 0;
+                for (let i = 0; i < password.length; i++) {
+                    if (isUpperCase(password.charAt(i))) {
+                        uppercase++;
+                    }
+                    if (isLowerCase(password.charAt(i))) {
+                        lowercase++;
+                    }
+                }
+                return (uppercase > 0 && lowercase > 0);
+
+            }
+
+            function checkUsername(username) {
+                if (validUsername(username.value)) {
+                    username.classList.remove("invalid");
+                } else {
+                    username.classList.add("invalid");
+                }
+            }
+
+            function checkPassword(password) {
+                if (validPassword(password.value)) {
+                    password.classList.remove("invalid");
+                } else {
+                    password.classList.add("invalid");
+                }
+            }
+
+            function validID(id) {
+                if (id.length != 9) {
+                    return false;
+                }
+                for (let i = 0; i < id.length; i++) {
+                    if (Number.isNaN(parseInt(id.charAt(i)))) {
+                        return false;
+                    }
+                }
+                return true;
+
+            }
+
+            function checkID(id) {
+                if (validID(id.value)) {
+                    id.classList.remove("invalid");
+                } else {
+                    id.classList.add("invalid");
+                }
+            }
+
+            function checkmsg(msg) {
+                let wordsCount = document.getElementById("words");
+
+                if (msg.value.trim().length == 0) {
+                    wordsCount.innerHTML = 25;
+                } else {
+                    let arr = msg.value.trim().split(/\s+/);
+                    let count = 25 - arr.length
+                    wordsCount.innerHTML = count;
+                    if (count == 0) {
+                        msg.setAttribute("disabled", "")
+                    }
+                }
+            }
+            window.addEventListener("load", () => {
+                let form = document.getElementById("form");
+                let username = document.getElementById("username");
+                let password = document.getElementById("password");
+                let id = document.getElementById("id");
+                let msg = document.getElementById("msg");
+                username.addEventListener("change", () => checkUsername(username));
+                password.addEventListener("change", () => checkPassword(password));
+                id.addEventListener("change", () => checkID(id));
+                msg.addEventListener("keyup", (e) => checkmsg(msg));
+                form.addEventListener("submit", submit);
+
+            });
+        </script>
+    </head>
+
+    <body>
+        <form id="form">
+            <div>
+                <label for="username">Username:</label><br/>
+                <input type="text" name="username" id="username">
+            </div>
+            <div>
+                <label for="password">Password:</label><br/>
+                <input type="password" name="password" id="password">
+            </div>
+            <div>
+                <label for="id">Student ID:</label><br/>
+                <input type="text" name="id" id="id">
+            </div>
+            <div>
+                <label for="msg">Message:</label><br/>
+                <textarea name="msg" id="msg"></textarea>
+                <p><span id="words">25</span> words left</p>
+            </div>
+            <div>
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+
+    </body>
 
 </html>
