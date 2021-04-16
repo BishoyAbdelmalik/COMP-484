@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>form</title>
+        <title>Lab1: Form Validation</title>
         <style>
             form {
                 margin: auto;
@@ -65,20 +65,31 @@
             }
         </style>
         <script>
+            let form
+            let username
+            let password
+            let id
+            let msg
+
             function submit() {
                 let result = document.getElementById("result");
                 checkUsername(username);
                 checkPassword(password);
                 checkID(id);
                 //TODO add check to which one has error
-                let checks = document.getElementsByClassName("hidden");
-                let body = document.getElementsByTagName("body")[0];
+                let checks = document.getElementsByClassName("hidden")
+                let body = document.getElementsByTagName("body")[0]
+                let usernameerror = document.getElementById("username-error").classList.contains("hidden") ? "" : "Username, "
+                let passerror = document.getElementById("password-error").classList.contains("hidden") ? "" : "Password, "
+                let iderror = document.getElementById("id-error").classList.contains("hidden") ? "" : "Student ID"
+
                 if (checks.length == 3) {
-                    result.innerHTML = "SUCCESS!";
-                    body.classList.remove("error");
+                    result.innerHTML = "SUCCESS!"
+                    body.classList.remove("error")
                 } else {
-                    result.innerHTML = "Please fix invalid input and try again";
-                    body.classList.add("error");
+                    result.innerHTML = `Please fix invalid input(s): ${usernameerror}${passerror}${iderror} and try again`
+
+                    body.classList.add("error")
 
                 }
             }
@@ -89,9 +100,15 @@
             }
 
             function validUsername(username) {
+                let error = document.getElementById("username-error")
+                if (username.length < 1) {
+                    error.innerHTML = "Username can't be empty"
+                    return false
+                }
                 let valid = true
                 for (let i = 0; i < username.length; i++) {
                     if (!isAlphabet(username.charAt(i))) {
+                        error.innerHTML = "only letters are allowed"
                         return false
                     }
                 }
@@ -109,107 +126,109 @@
             }
 
             function validPassword(password) {
-                let uppercase = 0;
-                let lowercase = 0;
+                let uppercase = 0
+                let lowercase = 0
                 for (let i = 0; i < password.length; i++) {
                     if (isUpperCase(password.charAt(i))) {
-                        uppercase++;
+                        uppercase++
                     }
                     if (isLowerCase(password.charAt(i))) {
-                        lowercase++;
+                        lowercase++
                     }
                 }
-                return (uppercase > 0 && lowercase > 0);
+                return (uppercase > 0 && lowercase > 0)
 
             }
 
             function checkUsername(username) {
-                let error = document.getElementById("username-error");
+                let error = document.getElementById("username-error")
                 if (validUsername(username.value)) {
-                    username.classList.remove("invalid");
-                    error.classList.add("hidden");
+                    username.classList.remove("invalid")
+                    error.classList.add("hidden")
                 } else {
-                    username.classList.add("invalid");
-                    error.classList.remove("hidden");
+                    username.classList.add("invalid")
+                    error.classList.remove("hidden")
                 }
             }
 
             function checkPassword(password) {
-                let error = document.getElementById("password-error");
+                let error = document.getElementById("password-error")
                 if (validPassword(password.value)) {
-                    password.classList.remove("invalid");
-                    error.classList.add("hidden");
+                    password.classList.remove("invalid")
+                    error.classList.add("hidden")
                 } else {
-                    password.classList.add("invalid");
-                    error.classList.remove("hidden");
+                    password.classList.add("invalid")
+                    error.classList.remove("hidden")
                 }
             }
 
             function validID(id) {
+                let error = document.getElementById("id-error")
                 if (id.length != 9) {
-                    return false;
+                    error.innerHTML = "Student ID must be 9 digits"
+                    return false
                 }
                 for (let i = 0; i < id.length; i++) {
                     if (Number.isNaN(parseInt(id.charAt(i)))) {
-                        return false;
+                        error.innerHTML = "Only numbers are allowed"
+                        return false
                     }
                 }
-                return true;
+                return true
 
             }
 
             function checkID(id) {
-                let error = document.getElementById("id-error");
+                let error = document.getElementById("id-error")
 
                 if (validID(id.value)) {
-                    id.classList.remove("invalid");
-                    error.classList.add("hidden");
+                    id.classList.remove("invalid")
+                    error.classList.add("hidden")
 
                 } else {
-                    id.classList.add("invalid");
-                    error.classList.remove("hidden");
+                    id.classList.add("invalid")
+                    error.classList.remove("hidden")
 
                 }
             }
 
             function checkmsg(msg) {
-                let wordsCount = document.getElementById("words");
+                let wordsCount = document.getElementById("words")
 
                 if (msg.value.trim().length == 0) {
-                    wordsCount.innerHTML = 25;
+                    wordsCount.innerHTML = 25
                 } else {
-                    let arr = msg.value.trim().split(/\s+/);
+                    let arr = msg.value.trim().split(/\s+/)
                     let count = 25 - arr.length
-                    wordsCount.innerHTML = count;
-                    if (count == 0) {
+                    wordsCount.innerHTML = count
+                    arr = msg.value.split(/\s+/)
+                    count = 25 - arr.length
+                    if (count == -1) {
+                        msg.innerHTML = msg.innerHTML.trim()
                         msg.setAttribute("disabled", "")
                     }
                 }
             }
-            let form;
-            let username;
-            let password;
-            let id;
-            let msg;
             window.addEventListener("load", () => {
-                form = document.getElementById("form");
-                username = document.getElementById("username");
-                password = document.getElementById("password");
-                id = document.getElementById("id");
-                msg = document.getElementById("msg");
-                username.addEventListener("change", () => checkUsername(username));
-                password.addEventListener("change", () => checkPassword(password));
-                id.addEventListener("change", () => checkID(id));
-                msg.addEventListener("keyup", (e) => checkmsg(msg));
-                form.addEventListener("submit", (event) => event.preventDefault());
-                let submitbtn = document.getElementById("submit");
-                submitbtn.addEventListener("click", submit);
-            });
+                form = document.getElementById("form")
+                username = document.getElementById("username")
+                password = document.getElementById("password")
+                id = document.getElementById("id")
+                msg = document.getElementById("msg")
+                username.addEventListener("change", () => checkUsername(username))
+                password.addEventListener("change", () => checkPassword(password))
+                id.addEventListener("change", () => checkID(id))
+                msg.addEventListener("keyup", (e) => checkmsg(msg))
+                form.addEventListener("submit", (e) => e.preventDefault())
+                let submitbtn = document.getElementById("submit")
+                submitbtn.addEventListener("click", submit)
+            })
         </script>
     </head>
 
     <body>
         <form id="form">
+            <h1>Lab1: Form Validation</h1>
             <div>
                 <label for="username">Username:</label><br/>
                 <input type="text" name="username" id="username">
