@@ -65,6 +65,8 @@
             }
         </style>
         <script>
+            // let is better than var because of the scope difference
+            // Variables declared by let have as their scope the block in which they are defined, as well as in any contained sub-blocks.while the scope of a var variable is the entire enclosing function 
             let form
             let username
             let password
@@ -76,7 +78,6 @@
                 checkUsername(username);
                 checkPassword(password);
                 checkID(id);
-                //TODO add check to which one has error
                 let checks = document.getElementsByClassName("hidden")
                 let body = document.getElementsByTagName("body")[0]
                 let usernameerror = document.getElementById("username-error").classList.contains("hidden") ? "" : "Username, "
@@ -215,6 +216,12 @@
                 password = document.getElementById("password")
                 id = document.getElementById("id")
                 msg = document.getElementById("msg")
+                    /**
+                        arrow functions are better than es5 anonymous functions because
+                        1- they are less code and easier to read
+                        2- this value inside a regular function is dynamic and depends on the invocation. But this inside the arrow function is bound lexically and equals to this of the outer function.
+                        3- arrow functions return implicitly if it has one expression
+                        */
                 username.addEventListener("change", () => checkUsername(username))
                 password.addEventListener("change", () => checkPassword(password))
                 id.addEventListener("change", () => checkID(id))
