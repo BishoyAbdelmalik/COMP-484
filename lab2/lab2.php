@@ -1,3 +1,7 @@
+<?php
+    include 'mysql.php';
+    var_dump(mysqli_fetch_assoc(pull()));
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
