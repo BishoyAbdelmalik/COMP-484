@@ -68,5 +68,6 @@ function pullWithUsername($username){
 
 
 function closeConnection(){
+    $connection=$GLOBALS['connection'];
     mysqli_close($connection); 
 }
