@@ -19,18 +19,18 @@ function insert($info){
     $keys = array_keys($info);
     $last = end($keys);
     foreach ($info as $key => $value){
-       if($key==$last){$query.='`'.$key.'`';}
+       if($key==$last){$query.='`'.mysqli_real_escape_string($GLOBALS['connection'],$key).'`';}
        else{$query.='`'.mysqli_real_escape_string($GLOBALS['connection'],$key).'`, ';}
     }
     $query.=") ";
     $query.='VALUES (';
     foreach ($info as $key => $value){
         if($key=="id"&&$value==" "){$query.="NULL,";} 
-        else if($key==$last){$query.="'".$value."'";}
+        else if($key==$last){$query.="'".mysqli_real_escape_string($GLOBALS['connection'],$value)."'";}
         else{$query.="'".mysqli_real_escape_string($GLOBALS['connection'],$value)."', ";}
     }
     $query.=');';
-    mysqli_query($GLOBALS['connection'],$query); 
+    return mysqli_query($GLOBALS['connection'],$query); 
 
 }
 
@@ -38,12 +38,11 @@ function delete($id){
     $query="DELETE FROM `".$GLOBALS['db']."` WHERE id='";
     $query .=$id;
     $query .="';";
-    mysqli_query($GLOBALS['connection'],$query); 
+    return mysqli_query($GLOBALS['connection'],$query); 
 
 }
 function pull(){
     //var_dump($amazonID);
-    mysqli_free_result($result);
     $query="SELECT * FROM `".$GLOBALS['db']."`;";
     // var_dump($query);
 
@@ -52,9 +51,8 @@ function pull(){
     return $result;
 
 }
-function pullWithUsername($username){
+function pull_with_username($username){
     //var_dump($amazonID);
-    mysqli_free_result($result);
     $query="SELECT * FROM `".$GLOBALS['db']."` where username='";
     $query .=$username;
     $query .="';";
@@ -65,9 +63,33 @@ function pullWithUsername($username){
     return $result;
 
 }
+function update_user($username,$info){
+    $query ='UPDATE  '.$GLOBALS['db'].' SET ';
 
+    $keys = array_keys($info);
+    $last = end($keys);
+    foreach ($info as $key => $value){
+       if($key==$last){
+           $query.='`'.mysqli_real_escape_string($GLOBALS['connection'],$key).'`=';
+           $query.="'".mysqli_real_escape_string($GLOBALS['connection'],$value)."'";
+        }
+       else{
+           $query.='`'.mysqli_real_escape_string($GLOBALS['connection'],$key).'`= ';
+           $query.="'".mysqli_real_escape_string($GLOBALS['connection'],$value)."'";
+           $query.=",";
+        }
+    }
 
-function closeConnection(){
+    $query .=" where username='";
+    $query .=$username;
+    $query .="';";
+
+    
+
+    return mysqli_query($GLOBALS['connection'],$query);
+}
+
+function close_connection(){
     $connection=$GLOBALS['connection'];
     mysqli_close($connection); 
 }
