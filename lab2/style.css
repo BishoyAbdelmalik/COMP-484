@@ -16,3 +16,16 @@ body {
 .login {
     color: white;
 }
+
+.choice {
+    cursor: pointer;
+    margin: 10px;
+    margin-left: 0;
+    border-bottom: 4px solid transparent;
+    transition: border 300ms ease-in-out;
+    padding-bottom: 5px;
+}
+
+.current {
+    border-bottom: 4px solid white;
+}

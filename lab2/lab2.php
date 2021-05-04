@@ -19,14 +19,17 @@
 <body>
     <div class="login">
         <div id="login">
-            <a><h1>Sign In:</h1></a>
-            <div class="form-group">
-                <label for="username-login">Username</label>
-                <input type="text" class="form-control" id="username-login" placeholder="Enter Username">
+            <div class="d-flex">
+                <h4 class="choice current">Sign In</h4>
+                <h4 class="choice">Sign Up</h4>
             </div>
             <div class="form-group">
-                <label for="password-login">Password</label>
-                <input type="password" class="form-control" id="password-login" placeholder="Enter Password">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" placeholder="Enter Username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Enter Password">
             </div>
             <div class="d-flex">
                 <button type="submit" id="sign-in" class="m-1 btn btn-light">Sign in</button>

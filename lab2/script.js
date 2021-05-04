@@ -1,4 +1,4 @@
-function sendJSON() {
+function sendJSON(data) {
 
     // let result = document.querySelector('.result');
     // let name = document.querySelector('#name');
@@ -25,8 +25,32 @@ function sendJSON() {
         }
     };
 
-    // Converting JSON data to string
-    var data = JSON.stringify({ "name": "test", "email": "test" });
     // Sending data with the request
     xhr.send(data);
 }
+
+function change_choice(e) {
+    let clicked = e.target
+    let choices = Array.from(choice)
+    if (!Array.from(clicked.classList).includes("current")) {
+        for (let index = 0; index < choices.length; index++) {
+            choices[index].classList.toggle("current")
+        }
+        document.getElementById("sign-in").classList.toggle("d-none")
+        document.getElementById("sign-up").classList.toggle("d-none")
+    }
+
+}
+let choice;
+window.addEventListener("load", () => {
+    choice = document.getElementsByClassName("choice")
+    Array.from(choice).forEach(e => e.addEventListener("click", change_choice))
+    let username = document.getElementById("username");
+    let password = document.getElementById("password");
+    document.getElementById("sign-in").addEventListener("click", () => {
+        sendJSON(JSON.stringify({ "username": username.value, "password": password.value, "type": "sign-in" }));
+    })
+    document.getElementById("sign-up").addEventListener("click", () => {
+        sendJSON(JSON.stringify({ "username": username.value, "password": password.value, "type": "sign-up" }));
+    })
+})
