@@ -32,10 +32,10 @@ function login($username, $password)
 {
     $result = mysqli_fetch_assoc(pull_with_username($username));
     // var_dump($result);
-    if ($result==null) {
+    if ($result == null) {
         return false;
     }
-    if(!password_verify_with_rehash($username,$password,$result["password"])){
+    if (!password_verify_with_rehash($username, $password, $result["password"])) {
         return false;
     }
     return true;
