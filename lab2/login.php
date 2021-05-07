@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: application/json');
 include_once 'mysql.php';
 
 function password_verify_with_rehash($username, $password, $hash)
@@ -27,14 +28,52 @@ function create_user($username, $password)
     }
     return true;
 }
+function login($username, $password)
+{
+    $result = mysqli_fetch_assoc(pull_with_username($username));
+    // var_dump($result);
+    if ($result==null) {
+        return false;
+    }
+    if(!password_verify_with_rehash($username,$password,$result["password"])){
+        return false;
+    }
+    return true;
+}
 // Takes raw data from the request
 $json = file_get_contents('php://input');
 // Converts it into a PHP object
-$data = json_decode($json);
+$data = json_decode($json, true);
 if (json_last_error() != JSON_ERROR_NONE) {
-    die("invalid request2");
+    echo (json_encode(array("status" => "invalid request")));
+    die();
 }
-var_dump($data);
+// var_dump($data);
+$type = $data["type"];
+// array(3) {
+//     ["username"]=>
+//     string(6) "bishoy"
+//     ["password"]=>
+//     string(4) "0011"
+//     ["type"]=>
+//     string(7) "sign-up"
+//   }
+$username = $data["username"];
+$password = $data["password"];
 
+if (strcmp($type, "sign-in") == 0) {
+    // echo("sign in");
+    if (login($username, $password)) {
+        echo (json_encode(array("status" => "sign-in success")));
+    } else {
+        echo (json_encode(array("status" => "error signing in")));
+    }
+} else if (strcmp($type, "sign-up") == 0) {
+    if (create_user($username, $password)) {
+        echo (json_encode(array("status" => "user created")));
+    } else {
+        echo (json_encode(array("status" => "error creating user")));
+    }
+}
 
 // create_user("test","password");
