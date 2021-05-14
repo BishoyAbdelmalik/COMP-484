@@ -37,12 +37,13 @@ function sendJSON(data) {
 
             // Print received data from server
             // result.innerHTML = this.responseText;
-            let content = document.getElementById("content")
-            let loginDiv = document.getElementsByClassName("login")[0]
-            loginDiv.classList.toggle("d-none")
+
             let json = JSON.parse(this.responseText)
             console.log(json)
             if (json["status"] === "sign-in success") {
+                let content = document.getElementById("content")
+                let loginDiv = document.getElementsByClassName("login")[0]
+                loginDiv.classList.toggle("d-none")
                 console.log("login")
                 if (json["isAdmin"]) {
                     adminLogin()
