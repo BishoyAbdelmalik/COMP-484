@@ -35,6 +35,7 @@
                 <button type="submit" id="sign-in" class="m-1 btn btn-light">Sign in</button>
                 <button type="submit" id="sign-up" class="m-1 btn btn-light d-none">Sign up</button>
             </div>
+            <p id="error" class="text-center text-danger"></p>
         </div>
     </div>
     <div id="content">

@@ -4,6 +4,24 @@ function login($username) {
     h1.innerHTML = `Welcome ${username.value}!`
     content.appendChild(h1)
 
+    for (let i = 0; i < 2; i++) {
+        let br = document.createElement("br")
+        content.appendChild(br)
+    }
+
+    let button = document.createElement("button")
+    button.innerHTML = "Change background"
+    button.classList.add("btn")
+    button.classList.add("btn-primary")
+    button.setAttribute("id", "change_background");
+    content.appendChild(button)
+    for (let i = 0; i < 3; i++) {
+        let br = document.createElement("br")
+        content.appendChild(br)
+    }
+
+
+
 }
 
 function logout() {
@@ -63,6 +81,9 @@ function sendJSON(data) {
             } else if (json["status"] === "user created") {
                 console.log("User created")
 
+            } else {
+                let error = document.getElementById("error")
+                error.innerHTML = json["status"]
             }
 
         }
@@ -73,6 +94,9 @@ function sendJSON(data) {
 }
 
 function change_choice(e) {
+    let error = document.getElementById("error")
+    error.innerHTML = ""
+
     let clicked = e.target
     let choices = Array.from(choice)
     if (!Array.from(clicked.classList).includes("current")) {
@@ -88,18 +112,25 @@ let choice;
 window.addEventListener("load", () => {
     choice = document.getElementsByClassName("choice")
     Array.from(choice).forEach(e => e.addEventListener("click", change_choice))
-    let username = document.getElementById("username");
-    let password = document.getElementById("password");
+    let username = document.getElementById("username")
+    let password = document.getElementById("password")
+    let error = document.getElementById("error")
     document.getElementById("sign-in").addEventListener("click", () => {
-        sendJSON(JSON.stringify({ "username": username.value, "password": password.value, "type": "sign-in" }));
+        error.innerHTML = ""
+        sendJSON(JSON.stringify({ "username": username.value, "password": password.value, "type": "sign-in" }))
     })
     document.getElementById("sign-up").addEventListener("click", () => {
-        sendJSON(JSON.stringify({ "username": username.value, "password": password.value, "type": "sign-up" }));
+        error.innerHTML = ""
+        sendJSON(JSON.stringify({ "username": username.value, "password": password.value, "type": "sign-up" }))
     })
     document.addEventListener('click', function(e) {
         if (e.target && e.target.id == 'logout') {
             //do something
             logout()
+        }
+        if (e.target && e.target.id == 'change_background') {
+            //do something
+            console.log("change background")
         }
     });
 })
