@@ -29,3 +29,7 @@ body {
 .current {
     border-bottom: 4px solid white;
 }
+
+#content {
+    padding: 20px;
+}

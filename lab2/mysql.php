@@ -45,6 +45,7 @@ function insert($info)
 function delete($id)
 {
     $db = $GLOBALS['db'];
+    
     $query = "DELETE FROM `$db` WHERE id='$id';";
     return mysqli_query($GLOBALS['connection'], $query);
 }
@@ -62,6 +63,7 @@ function pull()
 function pull_with_username($username)
 {
     $db = $GLOBALS['db'];
+    $username = mysqli_real_escape_string($GLOBALS['connection'],$username);
     //var_dump($amazonID);
     $query = "SELECT * FROM `$db` where username='$username';";
     //var_dump($query);
@@ -73,12 +75,15 @@ function pull_with_username($username)
 function update_user($username, $info)
 {
     $db = $GLOBALS['db'];
+    $username = mysqli_real_escape_string($GLOBALS['connection'],$username);
 
     $query = "UPDATE  $db SET ";
 
     $keys = array_keys($info);
     $last = end($keys);
     foreach ($info as $key => $value) {
+        $key = mysqli_real_escape_string($GLOBALS['connection'],$key);
+        $value = mysqli_real_escape_string($GLOBALS['connection'],$value);
         if ($key == $last) {
             $query .= '`' . mysqli_real_escape_string($GLOBALS['connection'], $key) . '`=';
             $query .= "'" . mysqli_real_escape_string($GLOBALS['connection'], $value) . "'";

@@ -60,11 +60,11 @@ $type = $data["type"];
 //   }
 $username = $data["username"];
 $password = $data["password"];
-
+$isAdmin = false;
 if (strcmp($type, "sign-in") == 0) {
     // echo("sign in");
     if (login($username, $password)) {
-        echo (json_encode(array("status" => "sign-in success")));
+        echo (json_encode(array("status" => "sign-in success","username"=>$username,"isAdmin"=>$isAdmin)));
     } else {
         echo (json_encode(array("status" => "error signing in")));
     }
