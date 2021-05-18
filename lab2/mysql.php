@@ -41,32 +41,18 @@ function insert($info)
     $query .= ');';
     return mysqli_query($GLOBALS['connection'], $query);
 }
-
-function delete($id)
-{
-    $db = $GLOBALS['db'];
-    
-    $query = "DELETE FROM `$db` WHERE id='$id';";
-    return mysqli_query($GLOBALS['connection'], $query);
-}
 function pull()
 {
     $db = $GLOBALS['db'];
-    //var_dump($amazonID);
     $query = "SELECT * FROM `$db`;";
-    // var_dump($query);
-
     $result = mysqli_query($GLOBALS['connection'], $query);
-
     return $result;
 }
 function pull_with_username($username)
 {
     $db = $GLOBALS['db'];
     $username = mysqli_real_escape_string($GLOBALS['connection'],$username);
-    //var_dump($amazonID);
     $query = "SELECT * FROM `$db` where username='$username';";
-    //var_dump($query);
 
     $result = mysqli_query($GLOBALS['connection'], $query);
 
@@ -95,9 +81,6 @@ function update_user($username, $info)
     }
 
     $query .= " where username='$username';";
-
-
-
     return mysqli_query($GLOBALS['connection'], $query);
 }
 

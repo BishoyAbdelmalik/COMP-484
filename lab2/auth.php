@@ -19,6 +19,9 @@ function password_verify_with_rehash($username, $password, $hash)
 
 function create_user($username, $password)
 {
+    if(strlen($username)<=0 ||strlen($password)<=0){
+        return false;
+    }
     $hash = password_hash($password, PASSWORD_DEFAULT);
     $user = array("username" => $username, "password" => $hash);
     $result = insert($user);
@@ -48,22 +51,20 @@ if (json_last_error() != JSON_ERROR_NONE) {
     echo (json_encode(array("status" => "invalid request")));
     die();
 }
-// var_dump($data);
 $type = $data["type"];
-// array(3) {
-//     ["username"]=>
-//     string(6) "bishoy"
-//     ["password"]=>
-//     string(4) "0011"
-//     ["type"]=>
-//     string(7) "sign-up"
-//   }
+
 $username = $data["username"];
 $password = $data["password"];
 $isAdmin = false;
 if (strcmp($type, "sign-in") == 0) {
     // echo("sign in");
     if (login($username, $password)) {
+        session_start();
+        if(strcmp($username,"Administrator")==0){
+
+            $isAdmin=true;
+        }
+        $_SESSION["admin"]=$isAdmin;
         echo (json_encode(array("status" => "sign-in success","username"=>$username,"isAdmin"=>$isAdmin)));
     } else {
         echo (json_encode(array("status" => "error signing in")));
@@ -74,6 +75,9 @@ if (strcmp($type, "sign-in") == 0) {
     } else {
         echo (json_encode(array("status" => "error creating user")));
     }
+}else{
+    session_start();
+    $_SESSION["admin"]=false;
+
 }
 
-// create_user("test","password");
