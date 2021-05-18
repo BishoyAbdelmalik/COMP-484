@@ -12,7 +12,6 @@ if (mysqli_connect_errno()) {
         mysqli_connect_error() . " (" . mysqli_connect_errno() . ")");
 }
 
-
 function insert($info)
 {
     $db = $GLOBALS['db'];
@@ -44,7 +43,7 @@ function insert($info)
 function pull()
 {
     $db = $GLOBALS['db'];
-    $query = "SELECT * FROM `$db`;";
+    $query = "SELECT * FROM `$db` ORDER BY username ASC;";
     $result = mysqli_query($GLOBALS['connection'], $query);
     return $result;
 }
@@ -57,31 +56,6 @@ function pull_with_username($username)
     $result = mysqli_query($GLOBALS['connection'], $query);
 
     return $result;
-}
-function update_user($username, $info)
-{
-    $db = $GLOBALS['db'];
-    $username = mysqli_real_escape_string($GLOBALS['connection'],$username);
-
-    $query = "UPDATE  $db SET ";
-
-    $keys = array_keys($info);
-    $last = end($keys);
-    foreach ($info as $key => $value) {
-        $key = mysqli_real_escape_string($GLOBALS['connection'],$key);
-        $value = mysqli_real_escape_string($GLOBALS['connection'],$value);
-        if ($key == $last) {
-            $query .= '`' . mysqli_real_escape_string($GLOBALS['connection'], $key) . '`=';
-            $query .= "'" . mysqli_real_escape_string($GLOBALS['connection'], $value) . "'";
-        } else {
-            $query .= '`' . mysqli_real_escape_string($GLOBALS['connection'], $key) . '`= ';
-            $query .= "'" . mysqli_real_escape_string($GLOBALS['connection'], $value) . "'";
-            $query .= ",";
-        }
-    }
-
-    $query .= " where username='$username';";
-    return mysqli_query($GLOBALS['connection'], $query);
 }
 
 function close_connection()

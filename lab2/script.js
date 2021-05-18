@@ -29,11 +29,9 @@ function adminLogin($username) {
     let h1 = document.createElement("h1")
     h1.innerHTML = `Welcome ${username.value}!`
     content.appendChild(h1)
+    let br = document.createElement("br")
+    content.appendChild(br)
 
-    for (let i = 0; i < 2; i++) {
-        let br = document.createElement("br")
-        content.appendChild(br)
-    }
 
     let table = document.createElement("div")
 
@@ -47,10 +45,8 @@ function adminLogin($username) {
         table.innerHTML = request.response
     };
     request.send()
-    for (let i = 0; i < 3; i++) {
-        let br = document.createElement("br")
-        content.appendChild(br)
-    }
+    br = document.createElement("br")
+    content.appendChild(br)
 
 }
 
@@ -61,7 +57,7 @@ function logout() {
     let loginDiv = document.getElementsByClassName("login")[0]
     loginDiv.classList.toggle("d-none")
     document.body.style.backgroundColor = "";
-    sendJSON(JSON.stringify({ "username": "", "password": "", "type": "sign-up" }))
+    sendJSON(JSON.stringify({ "username": " ", "password": " ", "type": "sign-out" }))
 
 }
 
@@ -87,7 +83,9 @@ function sendJSON(data) {
 
             // Print received data from server
             // result.innerHTML = this.responseText;
-
+            if (this.responseText.length == 0) {
+                return;
+            }
             let json = JSON.parse(this.responseText)
             console.log(json)
             if (json["status"] === "sign-in success") {
