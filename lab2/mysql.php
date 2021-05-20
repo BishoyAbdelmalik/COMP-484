@@ -44,7 +44,7 @@ function insert($info)
 function pull()
 {
     $db = $GLOBALS['db'];
-    $query = "SELECT * FROM `$db` ORDER BY username ASC;";
+    $query = "SELECT username,password FROM `$db` ORDER BY username ASC;";
     $result = mysqli_query($GLOBALS['connection'], $query);
     return $result;
 }

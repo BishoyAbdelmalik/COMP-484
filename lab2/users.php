@@ -10,7 +10,6 @@ $users = mysqli_fetch_assoc($result);
 <table>
     <thead>
         <tr>
-            <th>id</th>
             <th>username</th>
             <th>password</th>
         </tr>
