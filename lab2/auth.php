@@ -19,6 +19,8 @@ function password_verify_with_rehash($username, $password, $hash)
 
 function create_user($username, $password)
 {
+    $username=trim($username);
+    $password=trim($password);
     if(strlen($username)<=0 ||strlen($password)<=0){
         return false;
     }
@@ -33,6 +35,8 @@ function create_user($username, $password)
 }
 function login($username, $password)
 {
+    $username=trim($username);
+    $password=trim($password);
     $result = mysqli_fetch_assoc(pull_with_username($username));
     // var_dump($result);
     if ($result == null) {
